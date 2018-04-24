@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">QuizDroid</string>
+    <string name="math">Take this basic math test to find out how well you know your basic math skills.</string>
+    <string name="physics">The natural science of Physics is all around us! How much do you really
+        know about this incredible branch of science?</string>
+    <string name="heroes">The Marvel Super Heroes is an American / Canadian animated television series
+        starring five comic-book superheroes from Marvel Comics.</string>
+    <string name="mathq1">1 + 1 = ?</string>
+    <string name="matha11">2</string>
+    <string name="matha12">3</string>
+    <string name="matha13">4</string>
+    <string name="matha14">5</string>
+</resources>

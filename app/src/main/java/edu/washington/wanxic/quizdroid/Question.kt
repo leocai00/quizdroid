@@ -2,32 +2,22 @@ package edu.washington.wanxic.quizdroid
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.io.Serializable
 
-class Question(val question : String, val answers : Array<String>, val correctAns : Int) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.createStringArray(),
-            parcel.readInt()) {
+class Question(text : String, answer : String, answers : Array<String>): Serializable {
+    private val text: String = text
+    private val answer: String = answer
+    private val answers: Array<String> = answers
+
+    fun getText(): String {
+        return text
     }
 
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(question)
-        parcel.writeStringArray(answers)
-        parcel.writeInt(correctAns)
+    fun getAnswer(): String {
+        return answer
     }
 
-    override fun describeContents(): Int {
-        return 0
+    fun getAnswers(): Array<String> {
+        return answers
     }
-
-    companion object CREATOR : Parcelable.Creator<Question> {
-        override fun createFromParcel(parcel: Parcel): Question {
-            return Question(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Question?> {
-            return arrayOfNulls(size)
-        }
-    }
-
 }

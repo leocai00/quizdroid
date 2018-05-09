@@ -52,9 +52,9 @@ class TopicFragment : Fragment() {
         val begin = view.findViewById<Button>(R.id.begin)
 
         val quizApp = activity!!.application as QuizApp
-        val topic : Topic = quizApp.getTopicRepo()?.getTopic(param1!!)!!
-        description.text = topic.description
-        count.text = topic.questions.size.toString() + " Questions"
+        val topic : Topic = quizApp.getTopic(param1!!)!!
+        description.text = topic.getDesc()
+        count.text = topic.getQuestions().size.toString() + " Questions"
 
         val  quizPage : QuizFragment = QuizFragment.newInstance(param1!!, arrayListOf(0, 0))
         begin.setOnClickListener {

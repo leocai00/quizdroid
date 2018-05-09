@@ -13,6 +13,7 @@ import android.widget.Button
 import android.widget.TextView
 import edu.washington.wanxic.quizdroid.MainActivity
 import edu.washington.wanxic.quizdroid.Question
+import edu.washington.wanxic.quizdroid.QuizApp
 
 import edu.washington.wanxic.quizdroid.R
 
@@ -46,7 +47,7 @@ class AnswerFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getIntegerArrayList(ARG_PARAM2)
             param3 = it.getString(ARG_PARAM3)
-            param4 = it.getParcelable(ARG_PARAM4)
+            param4 = it.getSerializable(ARG_PARAM4) as Question?
         }
     }
 
@@ -59,13 +60,16 @@ class AnswerFragment : Fragment() {
         val ratio =  view.findViewById<TextView>(R.id.ratio)
         val next = view.findViewById<Button>(R.id.next)
 
+        val quizApp = activity!!.application as QuizApp
+        val size = quizApp.getQuestions(param1!!)!!.size
+
         currentAnswerText.text = "Your answer: " + param3
-        correctAnswerText.text = "Corrent answer: " + param4!!.answers!![param4!!.correctAns]
-        ratio.text = "You have " + param2!![1] + " out of 3 corrrent"
-        if(param2!![0] == 3) next.text = "Finish"
+        correctAnswerText.text = "Corrent answer: " + param4!!.getAnswers()!![param4!!.getAnswer().toInt() - 1]
+        ratio.text = "You have " + param2!![1] + " out of $size corrrent"
+        if(param2!![0] == size) next.text = "Finish"
 
         next.setOnClickListener {
-            if(param2!![0] < 3) {
+            if(param2!![0] < size) {
                 val  quizPage : QuizFragment = QuizFragment.newInstance(param1!!, param2!!)
                 this.fragmentManager
                         ?.beginTransaction()
@@ -132,7 +136,7 @@ class AnswerFragment : Fragment() {
                         putString(ARG_PARAM1, param1)
                         putIntegerArrayList(ARG_PARAM2, param2)
                         putString(ARG_PARAM3, param3)
-                        putParcelable(ARG_PARAM4, param4)
+                        putSerializable(ARG_PARAM4, param4)
                     }
                 }
     }

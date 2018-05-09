@@ -8,17 +8,15 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class CustomAdapter(context: Context, items: ArrayList<String>, subItem: ArrayList<String>, image : ArrayList<Int>) : BaseAdapter() {
+class CustomAdapter(context: Context, items: ArrayList<String>, subItem: ArrayList<String>) : BaseAdapter() {
     var thisItems: ArrayList<String>? = null
     var thisSubItem: ArrayList<String>? = null
-    var thisImage: ArrayList<Int>? =null
     private val myContext: Context
 
     init {
         myContext = context
         thisItems = items
         thisSubItem = subItem
-        thisImage = image
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -27,7 +25,6 @@ class CustomAdapter(context: Context, items: ArrayList<String>, subItem: ArrayLi
         val topicText = rowLayout.findViewById<TextView>(R.id.topic)
         val description = rowLayout.findViewById<TextView>(R.id.shortDescription)
         val imageDisplay = rowLayout.findViewById<ImageView>(R.id.imageView)
-        imageDisplay.setImageResource(thisImage!![position])
         topicText.text = thisItems!![position]
         description.text = thisSubItem!![position]
         return rowLayout

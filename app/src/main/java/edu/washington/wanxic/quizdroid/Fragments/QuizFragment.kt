@@ -61,7 +61,7 @@ class QuizFragment : Fragment() {
         submit.isClickable = false
 
         val quizApp = activity!!.application as QuizApp
-        val questions : Collection<Question> = quizApp.getTopicRepo()?.getQuestions(param1!!)!!
+        val questions : Array<Question> = quizApp.getQuestions(param1!!)!!
 
         var question : Question = questions.elementAt(param2!![0])
 
@@ -77,7 +77,7 @@ class QuizFragment : Fragment() {
             Log.i("SecondActivity", "CheckedId" + CheckedId.toString())
             param2!![0] += 1
             //Log.i("Quiz", math1.options[math1.answer])
-            if(currentAnswer == question.answers[question.correctAns]) {
+            if(currentAnswer == question.getAnswers()[question.getAnswer().toInt() - 1]) {
                 param2!![1] += 1
             }
 
@@ -151,10 +151,10 @@ class QuizFragment : Fragment() {
 
     private fun implement(question: Question, textView: TextView, answer1: RadioButton,
                           answer2: RadioButton, answer3: RadioButton, answer4: RadioButton): Unit {
-        textView.text = question.question
-        answer1.text = question.answers[0]
-        answer2.text = question.answers[1]
-        answer3.text = question.answers[2]
-        answer4.text = question.answers[3]
+        textView.text = question.getText()
+        answer1.text = question.getAnswers()[0]
+        answer2.text = question.getAnswers()[1]
+        answer3.text = question.getAnswers()[2]
+        answer4.text = question.getAnswers()[3]
     }
 }
